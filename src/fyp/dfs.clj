@@ -8,15 +8,11 @@
   [v coll]
   (some #(= % v) coll))
 
-(def graph {:A [:B :C]
-            :B [:A :X]
-            :X [:B :Y]
-            :Y [:X]
-            :C [:A :D]
-            :D [:C :E :F]
-            :E [:D :G]
-            :F [:D]
-            :G [:E]})
+(def graph {:A [:B :E]
+            :B [:C :D]
+            :E [:F :G]
+            :C [:H :I]
+            :G [:K :J]})
 
 (defn dfs
   [graph start goal]
@@ -34,4 +30,4 @@
             (recur new-stack visited)
             (recur new-stack (conj visited node))))))))
 
-(dfs graph :A :F)
+(dfs graph :A :G)

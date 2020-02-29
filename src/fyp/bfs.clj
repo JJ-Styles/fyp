@@ -9,15 +9,11 @@
   [v coll]
   (some #(= % v) coll))
 
-(def graph {:A [:B :C]
-            :B [:A :X]
-            :X [:B :Y]
-            :Y [:X]
-            :C [:A :D]
-            :D [:C :E :F]
-            :E [:D :G]
-            :F [:D]
-            :G [:E]})
+(def graph {:A [:B :E]
+            :B [:C :D]
+            :E [:F :G]
+            :C [:H :I]
+            :G [:K :J]})
 
 (defn bfs
       [graph start goal]
@@ -35,4 +31,4 @@
                        (recur new-queue visited)
                        (recur new-queue (conj visited node))))))))
 
-(bfs graph :A :F)
+(bfs graph :A :G)
