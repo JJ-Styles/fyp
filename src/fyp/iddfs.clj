@@ -1,4 +1,4 @@
-(ns iddfs)
+(ns fyp.iddfs)
 
 (defn find-neighbours
   [v coll]

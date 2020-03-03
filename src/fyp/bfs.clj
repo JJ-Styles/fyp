@@ -1,4 +1,4 @@
-(ns bfs
+(ns fyp.bfs
   (:import (clojure.lang PersistentQueue)))
 
 (defn find-neighbours
