@@ -9,12 +9,6 @@
   [v coll]
   (some #(= % v) coll))
 
-(def graph {:A [:B :E]
-            :B [:C :D]
-            :E [:F :G]
-            :C [:H :I]
-            :G [:K :J]})
-
 (defn bfs
       [graph start goal]
       (loop [queue (conj PersistentQueue/EMPTY start)
@@ -30,5 +24,3 @@
                      (if (visited? node visited)
                        (recur new-queue visited)
                        (recur new-queue (conj visited node))))))))
-
-(bfs graph :A :G)
