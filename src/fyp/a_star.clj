@@ -23,11 +23,11 @@
   (get heur key))
 
 (defn shortest-path-heuristics
-  [coll heuristic]
+  [coll heuristic start]
   (loop [val (first coll) col coll best val]
     (if (empty? col)
-      (first best)
-      (if (< (+ (last val) (h (first val) heuristic)) (+ (last best) (h (first best) heuristic)))
+      best
+      (if (< (+ (last val) (+ (h (first val) heuristic) (h start heuristic))) (+ (last best) (+ (h (first best) heuristic) (h start heuristic))))
         (recur (first (rest col)) (rest col) val)
         (recur (first (rest col)) (rest col) best)))))
 
@@ -50,43 +50,10 @@
           "Not Found"
           :else
           (recur (let [neighbours (find-neighbours node graph)
-                       new-node (shortest-path-heuristics (not-visited neighbours path) heur)
-                       new-path (conj path new-node)
-                       new-distance (+ distance (last (shortest-path (not-visited neighbours path))))
-                       new-total (+ new-distance (h new-node heur))
-                       new-open (priority-map [new-node new-path new-distance] new-total)]
+                       new-node (shortest-path-heuristics (not-visited neighbours path) heur node)
+                       new-distance (+ distance (last new-node))
+                       new-path (conj path (first new-node))
+                       new-total (+ new-distance (h (first new-node) heur))
+                       new-open (priority-map [(first new-node) new-path new-distance] new-total)]
                    new-open))
           )))))
-
-(def graph2
-  {
-   :A [{:B 20 :E 10 :D 4 :G 9 :J 15}]
-   :B [{:A 20 :C 11 :D 9 :E 21}]
-   :C [{:B 11 :H 13 :I 14 :D 3}]
-   :D [{:B 9 :A 4 :C 3 :H 15 :J 10}]
-   :E [{:A 10 :B 21 :F 16 :G 17}]
-   :F [{:E 16 :G 24}]
-   :G [{:E 17 :F 24 :K 5 :J 7 :A 9}]
-   :H [{:C 13 :I 2 :D 15 :J 4 :K 23}]
-   :I [{:H 2 :C 14}]
-   :J [{:G 7 :K 10 :H 4 :D 10 :A 15}]
-   :K [{:G 5 :J 10 :H 23}]
-   })
-
-(def heuristics
-  {
-   :A 7
-   :B 11
-   :C 0
-   :D 3
-   :E 17
-   :F 33
-   :G 16
-   :H 13
-   :I 14
-   :J 13
-   :K 23
-   })
-
-(a* :F :C graph2 heuristics)
-(a* :F :Q graph2 heuristics)
