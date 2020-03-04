@@ -8,21 +8,14 @@
   [v coll]
   (some #(= % v) coll))
 
-(def graph {:A [:B :E]
-            :B [:C :D]
-            :E [:F :G]
-            :C [:H :I]
-            :G [:K :J]})
-
 (defn dls
   [graph start goal depth]
   (cond
     (= depth 0)
     (if (= goal start)
-      start
+      [start]
       [])
     :else
-    (if (> depth 0)
       (loop [stack (vector start)
              visited []
              depth-gone 0]
@@ -33,23 +26,24 @@
             (if (= depth depth-gone)
               (if (empty? stack)
                 []
-                (if (>= depth-gone (count stack))
+                (if (> depth-gone (count (pop stack)))
                   (recur (pop stack) (conj visited (peek stack)) (- depth-gone 1))
                   (recur (pop stack) (conj visited (peek stack)) depth-gone)))
               (let [node (peek stack)
                     neighbours (-> (find-neighbours node graph) reverse)
                     not-visited (filter (complement #(visited? % visited)) neighbours)
-                    new-stack (into (pop stack) not-visited)]
+                    new-stack (into (if (= depth-gone 0)
+                                      stack
+                                      (pop stack))
+                                    not-visited)]
                 (if (visited? node visited)
                   (recur new-stack visited (+ depth-gone 1))
                   (recur
-                    (if (empty? not-visited)
-                      (into [start] new-stack)
-                      new-stack)
+                      new-stack
                     (conj visited node)
                     (if (empty? not-visited)
                       (- depth-gone 1)
-                      (+ depth-gone 1))))))))))))
+                      (+ depth-gone 1)))))))))))
 
 (defn iddfs
   [graph start goal]
@@ -61,6 +55,4 @@
         (not (= depth total-depth))
         (recur (dls graph start goal (+ depth 1)) (+ depth 1))
         :else
-        nil))))
-
-(iddfs graph :A :G)
+        "No Solution"))))
