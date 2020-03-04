@@ -8,12 +8,6 @@
   [v coll]
   (some #(= % v) coll))
 
-(def graph {:A [:B :E]
-            :B [:C :D]
-            :E [:F :G]
-            :C [:H :I]
-            :G [:K :J]})
-
 (defn dfs
   [graph start goal]
   (loop [stack (vector start)
@@ -29,5 +23,3 @@
           (if (visited? node visited)
             (recur new-stack visited)
             (recur new-stack (conj visited node))))))))
-
-(dfs graph :A :G)
