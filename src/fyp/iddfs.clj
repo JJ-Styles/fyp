@@ -51,15 +51,15 @@
     (= depth 0)
     (conj path node)
     :else
-    (let [neighbours (-> (find-neighbours node graph) reverse)
-          not-visited (filter (complement #(visited? % path)) neighbours)
+    (let [neighbours (find-neighbours node graph)
+          not-visited (remove #(visited? % path) neighbours)
           new-depth (- depth 1)
           new-path (conj path node)]
-      (for [neighbour not-visited]
-        (let [new-path (dls2 graph neighbour goal new-depth new-path)]
+      (for [neighbour neighbours
+        :let [new-path (dls2 graph neighbour goal new-depth new-path)]]
           (if (= goal (last new-path))
             path
-            ))))))
+            )))))
 
 
 (defn iddfs
