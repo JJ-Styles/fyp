@@ -45,14 +45,41 @@
                       (- depth-gone 1)
                       (+ depth-gone 1)))))))))))
 
+(defn dls2
+  [graph node goal depth path]
+  (cond
+    (= depth 0)
+    (conj path node)
+    :else
+    (let [neighbours (-> (find-neighbours node graph) reverse)
+          not-visited (filter (complement #(visited? % path)) neighbours)
+          new-depth (- depth 1)
+          new-path (conj path node)]
+      (for [neighbour not-visited]
+        (let [new-path (dls2 graph neighbour goal new-depth new-path)]
+          (if (= goal (last new-path))
+            path
+            ))))))
+
+
 (defn iddfs
   [graph start goal]
   (let [total-depth (count graph)]
-    (loop [path (dls graph start goal 0) depth 0]
+    (loop [path (dls2 graph start goal 0 []) depth 0]
       (cond
-        (not (empty? path))
-        {path, depth}
+        (empty? path)
+        "No Solution"
         (not (= depth total-depth))
-        (recur (dls graph start goal (+ depth 1)) (+ depth 1))
+        (recur (dls2 graph start goal (+ depth 1) []) (+ depth 1))
         :else
-        "No Solution"))))
+        {path, depth}))))
+
+(def tree {:A [:B :E]
+           :B [:C :D]
+           :E [:F :G]
+           :C [:H :I]
+           :G [:J :K]})
+
+(dls2 tree :A :K 3 [])
+(iddfs tree :A :K)
+(iddfs tree :A :Q)
