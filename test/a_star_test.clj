@@ -64,54 +64,54 @@
 
 (deftest A-Complete
   (testing "A* Completeness F to Q"
-    (is (= "Not Found" (a* :F :Q graph heuristics-to-C)))))
+    (is (= "Not Found" (a-star-method :F :Q graph heuristics-to-C)))))
 
 (deftest A-KtoC
   (testing "A* Optimality K to C"
-    (is (= [[:K :J :D :C]23] (a* :K :C graph heuristics-to-C)))))
+    (is (= (str [[:K :J :D :C] 23]) (a-star-method :K :C graph heuristics-to-C)))))
 
 (deftest A-FtoC
   (testing "A* Optimality F to C"
-    (is (= [[:F :E :A :D :C]33] (a* :F :C graph heuristics-to-C)))))
+    (is (= (str [[:F :E :A :D :C] 33]) (a-star-method :F :C graph heuristics-to-C)))))
 
 (deftest A-GtoC
   (testing "A* Optimality G to C"
-    (is (= [[:G :A :D :C]16] (a* :G :C graph heuristics-to-C)))))
+    (is (= (str [[:G :A :D :C] 16]) (a-star-method :G :C graph heuristics-to-C)))))
 
 (deftest A-HtoC
   (testing "A* Optimality H to C"
-    (is (= [[:H :C]13] (a* :H :C graph heuristics-to-C)))))
+    (is (= (str [[:H :C] 13]) (a-star-method :H :C graph heuristics-to-C)))))
 
 (deftest A-FtoI
   (testing "A* Optimality F to I"
-    (is (= [[:F :G :J :H :I] 37] (a* :F :I graph heuristics-to-I)))))
+    (is (= (str [[:F :G :J :H :I] 37]) (a-star-method :F :I graph heuristics-to-I)))))
 
 (deftest A-DtoI
   (testing "A* Optimality D to I"
-    (is (= [[:D :J :H :I]16] (a* :D :I graph heuristics-to-I)))))
+    (is (= (str [[:D :J :H :I] 16]) (a-star-method :D :I graph heuristics-to-I)))))
 
 (deftest A-KtoI
   (testing "A* Optimality K to I"
-    (is (= [[:K :J :H :I]16] (a* :K :I graph heuristics-to-I)))))
+    (is (= (str [[:K :J :H :I] 16]) (a-star-method :K :I graph heuristics-to-I)))))
 
 (deftest A-BtoI
   (testing "A* Optimality B to I"
-    (is (= [[:B :C :I]25] (a* :B :I graph heuristics-to-I)))))
+    (is (= (str [[:B :C :I] 25]) (a-star-method :B :I graph heuristics-to-I)))))
 
 (deftest A-FtoJ
   (testing "A* Optimality F to J"
-    (is (= [[:F :G :J] 31] (a* :F :J graph heuristics-to-J)))))
+    (is (= (str [[:F :G :J] 31]) (a-star-method :F :J graph heuristics-to-J)))))
 
 (deftest A-BtoJ
   (testing "A* Optimality B to J"
-    (is (= [[:B :D :J]19] (a* :B :J graph heuristics-to-J)))))
+    (is (= (str [[:B :D :J] 19]) (a-star-method :B :J graph heuristics-to-J)))))
 
 (deftest A-EtoJ
   (testing "A* Optimality E to J"
-    (is (= [[:E :A :D :J]24] (a* :E :J graph heuristics-to-J)))))
+    (is (= (str [[:E :A :D :J] 24]) (a-star-method :E :J graph heuristics-to-J)))))
 
 (deftest A-GtoJ
   (testing "A* Optimality G to J"
-    (is (= [[:G :J]7] (a* :G :J graph heuristics-to-J)))))
+    (is (= (str [[:G :J] 7]) (a-star-method :G :J graph heuristics-to-J)))))
 
 (run-tests)

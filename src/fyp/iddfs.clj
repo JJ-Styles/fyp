@@ -1,4 +1,6 @@
-(ns fyp.iddfs)
+(ns fyp.iddfs
+  (:gen-class
+    :methods [#^{:static true} [iddfs [map keyword keyword] vector]]))
 
 (defn find-neighbours
   [v coll]

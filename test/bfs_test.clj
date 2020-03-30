@@ -11,46 +11,46 @@
 
 (deftest bfs-AtoQ
   (testing "BFS Completeness A to Q"
-    (is (= "No Solution" (bfs tree :A :Q)))))
+    (is (= "No Solution" (bfs-method tree :A :Q)))))
 
 (deftest bfs-AtoA
   (testing "BFS Optimality A to A"
-    (is (= [:A] (bfs tree :A :A)))))
+    (is (= (str [:A]) (bfs-method tree :A :A)))))
 
 (deftest bfs-AtoB
   (testing "BFS Optimality A to B"
-    (is (= [:A :B] (bfs tree :A :B)))))
+    (is (= (str [:A :B]) (bfs-method tree :A :B)))))
 
 (deftest bfs-AtoC
   (testing "BFS Optimality A to C"
-    (is (= [:A :B :E :C] (bfs tree :A :C)))))
+    (is (= (str [:A :B :E :C]) (bfs-method tree :A :C)))))
 
 (deftest bfs-AtoE
   (testing "BFS Optimality A to E"
-    (is (= [:A :B :E] (bfs tree :A :E)))))
+    (is (= (str [:A :B :E]) (bfs-method tree :A :E)))))
 
 (deftest bfs-AtoF
   (testing "BFS Optimality A to F"
-    (is (= [:A :B :E :C :D :F] (bfs tree :A :F)))))
+    (is (= (str [:A :B :E :C :D :F]) (bfs-method tree :A :F)))))
 
 (deftest bfs-AtoG
   (testing "BFS Optimality A to G"
-    (is (= [:A :B :E :C :D :F :G] (bfs tree :A :G)))))
+    (is (= (str [:A :B :E :C :D :F :G]) (bfs-method tree :A :G)))))
 
 (deftest bfs-AtoH
   (testing "BFS Optimality A to H"
-    (is (= [:A :B :E :C :D :F :G :H] (bfs tree :A :H)))))
+    (is (= (str [:A :B :E :C :D :F :G :H]) (bfs-method tree :A :H)))))
 
 (deftest bfs-AtoI
   (testing "BFS Optimality A to I"
-    (is (= [:A :B :E :C :D :F :G :H :I] (bfs tree :A :I)))))
+    (is (= (str [:A :B :E :C :D :F :G :H :I]) (bfs-method tree :A :I)))))
 
 (deftest bfs-AtoJ
   (testing "BFS Optimality A to J"
-    (is (= [:A :B :E :C :D :F :G :H :I :J] (bfs tree :A :J)))))
+    (is (= (str [:A :B :E :C :D :F :G :H :I :J]) (bfs-method tree :A :J)))))
 
 (deftest bfs-AtoK
   (testing "BFS Optimality A to K"
-    (is (= [:A :B :E :C :D :F :G :H :I :J :K] (bfs tree :A :K)))))
+    (is (= (str [:A :B :E :C :D :F :G :H :I :J :K]) (bfs-method tree :A :K)))))
 
 (run-tests)

@@ -1,4 +1,6 @@
-(ns fyp.dfs)
+(ns fyp.dfs
+  (:gen-class
+    :methods [#^{:static true} [dfsMethod [String String String] String]]))
 
 (defn find-neighbours
   [v coll]
@@ -8,14 +10,14 @@
   [v coll]
   (some #(= % v) coll))
 
-(defn dfs
+(defn dfs-method
   [graph start goal]
   (loop [stack (vector start)
          visited []]
     (if (empty? stack)
-      "No Solution"
+      "Not Found"
       (if (= goal (peek stack))
-        (conj visited (peek stack))
+        (str (conj visited (peek stack)))
         (let [node (peek stack)
               neighbours (-> (find-neighbours node graph) reverse)
               not-visited (filter (complement #(visited? % visited)) neighbours)
@@ -23,3 +25,10 @@
           (if (visited? node visited)
             (recur new-stack visited)
             (recur new-stack (conj visited node))))))))
+
+(defn -dfsMethod [gra sta go]
+  (let
+    [graph (clojure.edn/read-string (str "{" gra "}"))
+     start (keyword sta)
+     goal (keyword go)]
+    (dfs-method graph start goal)))

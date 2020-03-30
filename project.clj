@@ -5,4 +5,9 @@
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [org.clojure/data.priority-map "0.0.10"]]
-  :repl-options {:init-ns fyp.core})
+  :aot [fyp.testfile
+        fyp.a-star
+        fyp.bfs
+        fyp.dfs
+        fyp.dijkstra]
+  :main fyp.testfile)

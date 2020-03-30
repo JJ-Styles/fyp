@@ -1,6 +1,6 @@
-(ns Dijkstras_test
+(ns dijkstras_test
   (:require [clojure.test :refer :all]
-            [fyp.Dijkstra :refer :all]))
+            [fyp.dijkstra :refer :all]))
 
 (def graph
   {
@@ -19,42 +19,42 @@
 
 (deftest Dijkstra-FtoQ
   (testing "Dijkstra Completeness F to Q"
-    (is (= "Not Found" (Dijkstra :F :Q graph)))))
+    (is (= "Not Found" (Dijkstra-method :F :Q graph)))))
 
 (deftest Dijkstra-KtoC
   (testing "Dijkstra Optimality K to C"
-    (is (= [[:K :G :A :D :C]21] (Dijkstra :K :C graph)))))
+    (is (= (str [[:K :G :A :D :C] 21]) (Dijkstra-method :K :C graph)))))
 
 (deftest Dijkstra-AtoC
   (testing "Dijkstra Optimality A to C"
-    (is (= [[:A :D :C]7] (Dijkstra :A :C graph)))))
+    (is (= (str [[:A :D :C] 7]) (Dijkstra-method :A :C graph)))))
 
 (deftest Dijkstra-BtoG
   (testing "Dijkstra Optimality B to G"
-    (is (= [[:B :D :A :G]22] (Dijkstra :B :G graph)))))
+    (is (= (str [[:B :D :A :G] 22]) (Dijkstra-method :B :G graph)))))
 
 (deftest Dijkstra-ItoH
   (testing "Dijkstra Optimality I to H"
-    (is (= [[:I :H]2] (Dijkstra :I :H graph)))))
+    (is (= (str [[:I :H] 2]) (Dijkstra-method :I :H graph)))))
 
 (deftest Dijkstra-JtoD
   (testing "Dijkstra Optimality J to D"
-    (is (= [[:J :D]10] (Dijkstra :J :D graph)))))
+    (is (= (str [[:J :D] 10]) (Dijkstra-method :J :D graph)))))
 
 (deftest Dijkstra-AtoK
   (testing "Dijkstra Optimality A to K"
-    (is (= [[:A :G :K]14] (Dijkstra :A :K graph)))))
+    (is (= (str [[:A :G :K] 14]) (Dijkstra-method :A :K graph)))))
 
 (deftest Dijkstra-CtoJ
   (testing "Dijkstra Optimality C to J"
-    (is (= [[:C :D :J]13] (Dijkstra :C :J graph)))))
+    (is (= (str [[:C :D :J] 13]) (Dijkstra-method :C :J graph)))))
 
 (deftest Dijkstra-EtoF
   (testing "Dijkstra Optimality E to F"
-    (is (= [[:E :F]16] (Dijkstra :E :F graph)))))
+    (is (= (str [[:E :F] 16]) (Dijkstra-method :E :F graph)))))
 
 (deftest Dijkstra-BtoF
   (testing "Dijkstra Optimality B to F"
-    (is (= [[:B :E :F]37] (Dijkstra :B :F graph)))))
+    (is (= (str [[:B :E :F] 37]) (Dijkstra-method :B :F graph)))))
 
 (run-tests)
