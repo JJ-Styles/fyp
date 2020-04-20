@@ -57,4 +57,6 @@
   (testing "Dijkstra Optimality B to F"
     (is (= (str [[:B :E :F] 37]) (Dijkstra-method :B :F graph)))))
 
+(time (Dijkstra-method :A :C graph))
+
 (run-tests)
